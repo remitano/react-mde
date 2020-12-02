@@ -50,5 +50,6 @@ export interface PasteOptions {
 }
 
 export type SaveImageHandler = (
-  data: ArrayBuffer
+  data: ArrayBuffer,
+  file: File
 ) => AsyncGenerator<string, boolean>;
