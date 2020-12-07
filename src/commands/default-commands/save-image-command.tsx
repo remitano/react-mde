@@ -42,25 +42,26 @@ export const saveImageCommand: Command = {
     const items = isPasteEvent(context)
       ? dataTransferToArray((event as React.ClipboardEvent).clipboardData.items)
       : isDragEvent(context)
-      ? dataTransferToArray((event as React.DragEvent).dataTransfer.items)
-      : fileListToArray(
+        ? dataTransferToArray((event as React.DragEvent).dataTransfer.items)
+        : fileListToArray(
           (event as React.ChangeEvent<HTMLInputElement>).target.files
         );
 
     for (const index in items) {
+      const initialState = textApi.getState();
       const breaksBeforeCount = getBreaksNeededForEmptyLineBefore(
         initialState.text,
         initialState.selection.start
       );
-      const breaksBefore = Array(breaksBeforeCount + 1).join("\n");
 
+      const breaksBefore = Array(breaksBeforeCount + 1).join("\n");
       const placeHolder = `${breaksBefore}![${l18n.uploadingImage}]()`;
 
       textApi.replaceSelection(placeHolder);
 
       const blob = items[index];
       const blobContents = await readFileAsync(blob);
-      const savingImage = saveImage(blobContents);
+      const savingImage = saveImage(blobContents, blob);
       const imageUrl = (await savingImage.next()).value;
 
       const newState = textApi.getState();
@@ -78,8 +79,7 @@ export const saveImageCommand: Command = {
           end: initialState.selection.start + placeHolder.length
         });
 
-        const realImageMarkdown = `${breaksBefore}![image](${imageUrl})`;
-
+        const realImageMarkdown = imageUrl ? `${breaksBefore}![image](${imageUrl})` : "";
         const selectionDelta = realImageMarkdown.length - placeHolder.length;
 
         textApi.replaceSelection(realImageMarkdown);
