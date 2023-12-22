@@ -2,10 +2,12 @@
 
 .mde-textarea-wrapper {
   position: relative;
+  margin: 12px 0;
 
   textarea.mde-text {
     width: 100%;
-    border: 0;
+    border: 1px solid $mde-border-color;
+    border-radius: $mde-border-radius;
     padding: $mde-editor-padding;
     vertical-align: top;
     resize: vertical;

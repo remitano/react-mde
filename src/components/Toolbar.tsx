@@ -28,8 +28,9 @@ export interface ToolbarProps {
 }
 
 export class Toolbar extends React.Component<ToolbarProps> {
-  handleTabChange = (tab: Tab) => {
+  handleTabChange = () => {
     const { onTabChange } = this.props;
+    const tab: Tab = this.props.tab === "write" ? "preview" : "write"
     onTabChange(tab);
   };
 
@@ -42,8 +43,6 @@ export class Toolbar extends React.Component<ToolbarProps> {
       onCommand,
       readOnly,
       disablePreview,
-      writeButtonProps,
-      previewButtonProps,
       buttonProps
     } = this.props;
     if ((!buttons || buttons.length === 0) && !children) {
@@ -52,28 +51,16 @@ export class Toolbar extends React.Component<ToolbarProps> {
 
     const writePreviewTabs = (
       <div className="mde-tabs">
-        <button
-          type="button"
-          className={classNames({ selected: this.props.tab === "write" })}
-          onClick={() => this.handleTabChange("write")}
-          {...writeButtonProps}
-        >
-          {l18n.write}
-        </button>
-        <button
-          type="button"
-          className={classNames({ selected: this.props.tab === "preview" })}
-          onClick={() => this.handleTabChange("preview")}
-          {...previewButtonProps}
-        >
-          {l18n.preview}
-        </button>
+        <div>{l18n.preview}</div>
+        <label className="switch">
+          <input type="checkbox" checked={this.props.tab === "preview"} onChange={this.handleTabChange}/>
+          <span className="slider round"></span>
+        </label>
       </div>
-    );
+    )
 
     return (
       <div className={classNames("mde-header", classes)}>
-        {!disablePreview && writePreviewTabs}
         {buttons.map((commandGroup: ToolbarButtonData[], i: number) => (
           <ToolbarButtonGroup key={i} hidden={this.props.tab === "preview"}>
             {commandGroup.map((c: ToolbarButtonData, j) => {
@@ -91,6 +78,7 @@ export class Toolbar extends React.Component<ToolbarProps> {
             })}
           </ToolbarButtonGroup>
         ))}
+        {!disablePreview && writePreviewTabs}
       </div>
     );
   }

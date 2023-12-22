@@ -2,7 +2,10 @@
 
 .mde-preview {
   .mde-preview-content {
+    border: 1px solid $mde-border-color;
+    border-radius: $mde-border-radius;
     padding: $mde-preview-padding;
+    margin: 12px 0;
 
     p, blockquote, ul, ol, dl, table, pre {
       margin-top: 0;

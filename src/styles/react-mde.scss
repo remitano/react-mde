@@ -1,8 +1,7 @@
 @import "variables.scss";
 
 .react-mde {
-  border: 1px solid $mde-border-color;
-  border-radius: $mde-border-radius;
+  border: 0;
 
   * {
     box-sizing: border-box;
@@ -15,13 +14,11 @@
   .image-tip {
     user-select: none;
     display: flex !important;
-    padding: 7px 10px;
     margin: 0;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 16px;
-    color: gray;
+    color: #707A8A;
     background-color: $mde-toolbar-color;
-    border-top: 1px solid $mde-border-color;
     position: relative;
 
     .image-input {
