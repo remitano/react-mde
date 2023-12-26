@@ -5,26 +5,20 @@
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  border-bottom: 1px solid $mde-border-color;
-  border-radius: $mde-border-radius $mde-border-radius 0 0;
+  border: 1px solid $mde-toolbar-border-color;
+  border-radius: $mde-border-radius;
   background: $mde-toolbar-color;
+  padding: 8px;
 
   .mde-tabs {
     display: flex;
+    flex: 1;
     flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
 
-    button {
-      border-radius: $mde-border-radius;
-      margin: 6px 3px;
-      background-color: transparent;
-      border: 1px solid transparent;
-      cursor: pointer;
-      &:first-child {
-        margin-left: 6px;
-      }
-      &.selected {
-        border: 1px solid $mde-border-color
-      }
+    div {
+      padding-right: 8px;
     }
   }
 
