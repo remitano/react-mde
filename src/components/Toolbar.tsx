@@ -51,9 +51,9 @@ export class Toolbar extends React.Component<ToolbarProps> {
 
     const writePreviewTabs = (
       <div className="mde-tabs">
-        <div>{l18n.preview}</div>
+        <div className="preview-btn-title">{l18n.preview}</div>
         <label className="switch">
-          <input type="checkbox" checked={this.props.tab === "preview"} onChange={this.handleTabChange}/>
+          <input type="checkbox" checked={this.props.tab === "preview"} onChange={this.handleTabChange} />
           <span className="slider round"></span>
         </label>
       </div>
@@ -63,17 +63,20 @@ export class Toolbar extends React.Component<ToolbarProps> {
       <div className={classNames("mde-header", classes)}>
         {buttons.map((commandGroup: ToolbarButtonData[], i: number) => (
           <ToolbarButtonGroup key={i} hidden={this.props.tab === "preview"}>
+            {i > 0 && <div className="button-group-divider" />}
             {commandGroup.map((c: ToolbarButtonData, j) => {
               return (
-                <ToolbarButton
-                  key={j}
-                  name={c.commandName}
-                  buttonContent={c.buttonContent}
-                  buttonProps={{ ...(buttonProps || {}), ...c.buttonProps }}
-                  onClick={() => onCommand(c.commandName)}
-                  readOnly={readOnly}
-                  buttonComponentClass={c.buttonComponentClass}
-                />
+                <React.Fragment key={j}>
+                  {j > 0 && <div className="button-item-divider" />}
+                  <ToolbarButton
+                    name={c.commandName}
+                    buttonContent={c.buttonContent}
+                    buttonProps={{ ...(buttonProps || {}), ...c.buttonProps }}
+                    onClick={() => onCommand(c.commandName)}
+                    readOnly={readOnly}
+                    buttonComponentClass={c.buttonComponentClass}
+                  />
+                </React.Fragment>
               );
             })}
           </ToolbarButtonGroup>

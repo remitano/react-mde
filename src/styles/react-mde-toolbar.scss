@@ -8,7 +8,7 @@
   border: 1px solid $mde-toolbar-border-color;
   border-radius: $mde-border-radius;
   background: $mde-toolbar-color;
-  padding: 8px;
+  padding: 8px 16px 8px 16px;
 
   .mde-tabs {
     display: flex;
@@ -31,9 +31,20 @@
     vertical-align: -.125em;
   }
 
+  .button-group-divider {
+    width: 1px;
+    height: 32px;
+    margin: 0px 16px;
+    background-color: $mde-toolbar-border-color;
+  }
+
+  .button-item-divider {
+    width: 8px;
+  }
+
   ul.mde-header-group {
     margin: 0;
-    padding: $mde-toolbar-padding;
+    padding: 0px;
     list-style: none;
     display: flex;
     flex-wrap: nowrap;
@@ -45,16 +56,18 @@
     li.mde-header-item {
       display: inline-block;
       position: relative;
-      margin: 0 4px;
       button {
         text-align: left;
         cursor: pointer;
-        height: 22px;
-        padding: 4px;
+        height: 32px;
+        width: 32px;
         margin: 0;
         border: none;
         background: none;
-        color: $mde-button-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $mde-content-primary;
         @keyframes tooltip-appear {
           from {
             opacity: 0;
@@ -108,6 +121,12 @@
         }
       }
     }
+  }
+
+  .preview-btn-title {
+    color: $mde-content-primary;
+    font-size: 14px;
+    font-weight: 400;
   }
 }
 
